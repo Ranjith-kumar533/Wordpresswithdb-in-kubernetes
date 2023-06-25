@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: cep-project1
+  name: test1
+  labels:
+    app: mydb1
+spec:
+  capacity: 
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 172.31.58.55
+    path: "/nfsdata"

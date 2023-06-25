@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mydb1
+  name: mydb1
+  namespace: cep-project1
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: mydb1
+ 

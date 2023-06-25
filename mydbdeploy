@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: cep-project1
+  labels:
+    app: mydb1
+  name: mydb1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydb1
+  template:
+    metadata:
+        labels:
+         app: mydb1
+    spec:
+      containers:
+      - image: docker.io/mysql:5.7
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: mysecret
+              key: mypass
+        - name: MYSQL_DATABASE
+          value: niit
+        volumeMounts:
+        - name: myvol1
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: myvol1
+        persistentVolumeClaim:
+         claimName: mypvc1
+
